@@ -15,6 +15,6 @@ RUN mkdir /home/node/some_shit_service/logs
 RUN chmod 755 /home/node/some_shit_service/logs
 RUN npm install pm2 -g
 
-EXPOSE 3000
+EXPOSE 8452
 
 CMD [ "pm2-runtime", "index.js" ]
