@@ -43,7 +43,7 @@ steps:
       - docker build -t nick/some_shit_service .
       - docker rmi -f $(docker images -f "dangling=true" -q) || true
       - docker container stop some_shit_service || true && docker rm some_shit_service || true
-      - docker run -v /home/some_shit_service:/home/node/some_shit_service/logs -v /home/ssl:/home/node/some_shit_service/ssl -e NODE_ENV=$NODE_ENV -e DB_USER=$DB_USER -e DB_PASS=$DB_PASS -e DB_SERVER=$DB_SERVER -e DB_DATABASE=$DB_DATABASE -p 8449:8449 --net="host" -d --restart="always" --name=some_shit_service nick/some_shit_service
+      - docker run -v /home/some_shit_service:/home/node/some_shit_service/logs -v /home/ssl:/home/node/some_shit_service/ssl -e NODE_ENV=$NODE_ENV -e DB_USER=$DB_USER -e DB_PASS=$DB_PASS -e DB_SERVER=$DB_SERVER -e DB_DATABASE=$DB_DATABASE -e PORT=$PORT -p 8449:8449 --net="host" -d --restart="always" --name=some_shit_service nick/some_shit_service
 
   - name: telegram
     image: appleboy/drone-telegram:latest
