@@ -8,6 +8,7 @@ const {
 
 //start
 router.route('/getStat').get((req, res, next) => {
+  console.log('req: ', req);
   pool.connect(err => {
     if (err) res.sendStatus(400);
 
