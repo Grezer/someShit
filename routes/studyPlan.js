@@ -12,7 +12,7 @@ router.route('/getStat').get((req, res, next) => {
       `
       SELECT Номер, Заполнено, Всего, Комментарий 
       FROM [UniASR].[dbo].[ASR_Stat]
-      ORDER BY Номер
+      ORDER BY Комментарий
     `,
       (err, result) => {
         if (err) {
