@@ -1,21 +1,16 @@
-const router = require('express').Router();
-const sql = require('mssql');
-const pool = require('../config/config');
-const {
-  logger
-} = require('../lib/logger');
+const router = require('express').Router()
+const sql = require('mssql')
+const pool = require('../config/config')
+const { logger } = require('../lib/logger')
 
-
-//start
 router.route('/getStat').get((req, res, next) => {
-  console.log('req: ', req);
   pool.connect(err => {
-    if (err) res.sendStatus(400);
+    if (err) res.sendStatus(400)
 
-    const request = new sql.Request(pool);
+    const request = new sql.Request(pool)
     request.query(
       `
-      SELECT Номер, Заполнено, Всего 
+      SELECT Номер, Заполнено, Всего, Комментарий 
       FROM [UniASR].[dbo].[ASR_Stat]
       ORDER BY Номер
     `,
@@ -23,19 +18,19 @@ router.route('/getStat').get((req, res, next) => {
         if (err) {
           logger.log('error', 'Get group info error', {
             err
-          });
-          res.sendStatus(400);
+          })
+          res.sendStatus(400)
         }
 
         logger.log('info', 'Get group info success', {
-          result: req.params.group,
-        });
+          result: req.params.group
+        })
 
-        pool.close();
-        res.send(result.recordset);
-      },
-    );
-  });
-});
+        pool.close()
+        res.send(result.recordset)
+      }
+    )
+  })
+})
 
-module.exports = router;
+module.exports = router
